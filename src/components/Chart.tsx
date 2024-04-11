@@ -14,21 +14,20 @@ import {
 import { useRef } from "react";
 import { Chart } from "react-chartjs-2";
 
-ChartJS.register(
-  LinearScale,
-  CategoryScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Legend,
-  Tooltip
-);
-
 type Props = {
   data: IResponse;
 };
 
 const ChartComponent = async ({ data }: Props) => {
+  ChartJS.register(
+    LinearScale,
+    CategoryScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    Legend,
+    Tooltip
+  );
   const colorScheme: { [key: string]: string } = {
     Breakthrough: "rgb(75, 192, 192)",
     Capability: "rgb(255, 99, 132)",
