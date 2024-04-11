@@ -1,33 +1,16 @@
 "use client";
 import { monthNames } from "@/shared/general";
 import { IResponse } from "@/shared/types";
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Tooltip,
-} from "chart.js";
+import { Chart, registerables } from "chart.js";
 import { useRef } from "react";
-import { Chart } from "react-chartjs-2";
+import { Chart as ChartJS } from "react-chartjs-2";
+Chart.register(...registerables);
 
 type Props = {
   data: IResponse;
 };
 
 const ChartComponent = async ({ data }: Props) => {
-  ChartJS.register(
-    LinearScale,
-    CategoryScale,
-    BarElement,
-    PointElement,
-    LineElement,
-    Legend,
-    Tooltip
-  );
   const colorScheme: { [key: string]: string } = {
     Breakthrough: "rgb(75, 192, 192)",
     Capability: "rgb(255, 99, 132)",
@@ -64,14 +47,14 @@ const ChartComponent = async ({ data }: Props) => {
     labels,
     datasets,
   };
-  const chartRef = useRef<ChartJS>(null);
+  const chartRef = useRef<Chart>(null);
 
   return (
     <>
       <h2 className="text-xl text-center font-bold text-gray-500">
         R&D Manning Distribution - General View
       </h2>
-      <Chart
+      <ChartJS
         ref={chartRef}
         type="bar"
         data={info}
